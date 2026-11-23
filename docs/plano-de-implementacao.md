@@ -2,7 +2,7 @@
 
 ## Plano de implementação e refatoração
 
-**Status:** Em implementação (Etapas 2–6, 9–10 e 13 concluídas; Etapa 5 parcial; Etapas 7–8 pendentes)
+**Status:** Em implementação (Etapas 2–6, 9–10 e 13 concluídas; Etapas 5 e 8 parciais; Etapas 7 e 9 pendentes)
 **Objetivo:** Modularizar, aprimorar e ampliar o painel de chamadas, tornando-o configurável, personalizável e preparado para gerenciar múltiplos painéis.
 
 ---
@@ -14,19 +14,19 @@
 - **Etapa 2** — seleção de computador, localStorage, 5 tentativas, máquinas vinculadas, atualização a cada 30 min (`configuracao-painel.js`).
 - **Etapa 3** — `chamada.php` dinâmico (máquinas/filas), histórico 2–5, distinção `NR_SEQ_FILA_SENHA` × `NR_SEQ_FILA_SENHA_ORIGEM` preservada.
 - **Etapa 4** — módulos JS com eventos (`window.Grid*`).
-- **Etapa 5 (parcial)** — `variaveis.css` com 4 temas e variáveis em uso; falta separar `chamada.css`, `historico.css`, `animacoes.css`, `responsivo.css` (hoje em `index.css`).
+- **Etapa 5 (parcial)** — `variaveis.css` com 4 temas, `animacoes.css` com zoom/fade/slide e destaque de chamada; falta separar `chamada.css`, `historico.css`, `responsivo.css` (hoje em `index.css`/`layout.css`).
 - **Etapa 6** — JSON por computador com versão, backup (retenção: últimos 20), escrita atômica e cópia em localStorage.
 - **Etapa 9 (sincronização)** — verificação a cada 30 min, comparação de versão, aplicação somente com fila vazia, recuperação por visibility/pageshow.
 - **Etapa 13** — 2 bips, voz pt-BR (rate 0.88), exibição de 8 s, dedup por `id_evento`, histórico sem duplicatas.
 - **Fase A (correções)** — schema canônico único em `api/configuracoes.php` (compatível com `aparencia.js`); validação estrita por campo no POST (cores hex, tamanhos, slug de tema, caminhos de imagem, filas, quantidade 2–5, duração 3–30); chaves desconhecidas descartadas; helpers unificados no `_bootstrap.php`; código morto removido de `config.php`; `.gitignore` criado; acesso web a `config/` negado no Apache.
 - **Fase B (filas)** — seção "Filas monitoradas" no painel de configurações (`configuracoes-admin.js`): lista de checkboxes, salvamento via POST e aplicação imediata respeitando a fila de chamadas.
+- **Fase C (interface administrativa + pré-visualização)** — abas Geral / Chamada / Histórico; títulos (`geral.titulo`, `chamada.titulo`, `historico.titulo`), duração do destaque e animação aplicados da configuração (`interface.js`, `historico.js`, `animacoes.css`); preview ao vivo via evento `grid:configuracoes-preview`; fluxo Testar / Voltar às configurações / Confirmar e salvar / Cancelar; cores com opção "Padrão do tema" (null).
 
 ### Pendente
 
 - **Etapa 7** — vinculação entre painéis (origem, propagação, desvinculação, anti-ciclo).
-- **Etapa 8** — interface administrativa com abas (Geral, Chamada, Histórico, Imagens) e upload de imagens (`api/imagens.php`).
+- **Etapa 8 (restante)** — aba Imagens e upload de imagens (`api/imagens.php`).
 - **Etapa 9 (temas)** — gerenciamento CRUD de temas em `config/temas/*.json` (os 4 temas existem apenas como CSS).
-- **Etapa 10 (pré-visualização)** — fluxo Testar / Voltar / Confirmar e salvar / Cancelar.
 - **Etapa 11** — testes e validação final multi-painel.
 
 ---
