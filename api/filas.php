@@ -1,20 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/_bootstrap.php';
-
-function grid_filias_responder(int $status, array $dados): never
-{
-  http_response_code($status);
-
-  header('Content-Type: application/json; charset=utf-8');
-
-  echo json_encode(
-    $dados,
-    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-  );
-
-  exit;
-}
 
 try {
   grid_validar_metodo('GET');
@@ -62,7 +50,7 @@ try {
     $filas
   );
 
-  grid_filias_responder(200, [
+  grid_responder([
     'sucesso' => true,
     'filas' => $filas
   ]);
@@ -70,8 +58,8 @@ try {
 } catch (Throwable $e) {
   error_log('[GRID] Erro ao consultar filas: ' . $e->getMessage());
 
-  grid_filias_responder(500, [
+  grid_responder([
     'sucesso' => false,
     'mensagem' => 'Não foi possível carregar as filas.'
-  ]);
+  ], 500);
 }

@@ -1,25 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/_bootstrap.php';
 
 date_default_timezone_set('America/Sao_Paulo');
-
-/**
- * Retorna uma resposta JSON e encerra a execução.
- */
-function grid_chamada_responder(int $status, array $dados): never
-{
-  http_response_code($status);
-
-  header('Content-Type: application/json; charset=utf-8');
-
-  echo json_encode(
-    $dados,
-    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
-  );
-
-  exit;
-}
 
 /**
  * Valida um identificador numérico positivo.
@@ -249,7 +234,7 @@ try {
    */
 
   if (empty($filas) || empty($maquinas)) {
-    grid_chamada_responder(200, [
+    grid_responder([
       'sucesso' => true,
       'servidor' => date('Y-m-d H:i:s'),
       'chamada_atual' => null,
@@ -591,7 +576,7 @@ try {
    * ============================================================
    */
 
-  grid_chamada_responder(200, [
+  grid_responder([
     'sucesso' => true,
 
     'servidor' => date('Y-m-d H:i:s'),
@@ -603,12 +588,12 @@ try {
 
 } catch (InvalidArgumentException $e) {
 
-  grid_chamada_responder(400, [
+  grid_responder([
     'sucesso' => false,
     'mensagem' => $e->getMessage(),
     'chamada_atual' => null,
     'ultimas' => []
-  ]);
+  ], 400);
 
 } catch (Throwable $e) {
 
@@ -616,10 +601,10 @@ try {
     '[GRID] Erro ao consultar chamadas: ' . $e->getMessage()
   );
 
-  grid_chamada_responder(500, [
+  grid_responder([
     'sucesso' => false,
     'mensagem' => 'Não foi possível consultar as chamadas.',
     'chamada_atual' => null,
     'ultimas' => []
-  ]);
+  ], 500);
 }
