@@ -203,8 +203,27 @@ require_once __DIR__ . '/config.php';
 
         </section>
 
-      </div>
+        <section class="configuracoes__secao">
 
+          <h3 class="configuracoes__subtitulo">
+            Filas monitoradas
+          </h3>
+
+          <p class="configuracoes__descricao">
+            Selecione as filas de senha que este painel deve anunciar.
+          </p>
+
+          <div id="mensagemFilas" class="mensagem"></div>
+
+          <div id="listaFilas" class="configuracoes__filas"></div>
+
+          <button type="button" class="configuracoes__botao" id="btnSalvarFilas" disabled>
+            Salvar filas
+          </button>
+
+        </section>
+
+      </div>
     </aside>
 
   </main>
@@ -215,6 +234,7 @@ require_once __DIR__ . '/config.php';
 
   <script src="assets/js/api.js"></script>
   <script src="assets/js/configuracao-painel.js"></script>
+  <script src="assets/js/configuracoes-admin.js"></script>
   <script src="assets/js/chamadas.js"></script>
   <script src="assets/js/fila.js"></script>
   <script src="assets/js/audio.js"></script>

@@ -288,6 +288,14 @@
   border-color: #bfdbfe;
 }
 
+.mensagem--sucesso {
+  display: block;
+
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
 /* Rótulo do campo */
 
 .tela-configuracao-inicial__conteudo label {
