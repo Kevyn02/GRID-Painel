@@ -1,0 +1,194 @@
+/* ========================================
+   GRID - Painel de configurações
+   ======================================== */
+
+/* Fundo sobre o painel */
+
+.configuracoes__fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+
+  background-color: rgb(0 0 0 / 35%);
+  backdrop-filter: blur(2px);
+}
+
+/* Painel lateral */
+
+.configuracoes {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  height: 100dvh;
+
+  background-color: var(--grid-cor-secundaria, #ffffff);
+  color: var(--grid-cor-texto, #222222);
+
+  box-shadow: -4px 0 20px rgb(0 0 0 / 15%);
+
+  animation: grid-configuracoes-entrada 0.25s ease;
+}
+
+/* Cabeçalho */
+
+.configuracoes__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 24px;
+  gap: 16px;
+
+  border-bottom: 1px solid var(--grid-cor-borda, #dddddd);
+}
+
+.configuracoes__titulo {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.configuracoes__fechar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background-color: transparent;
+  color: var(--grid-cor-texto, #222222);
+
+  font-size: 28px;
+  line-height: 1;
+}
+
+.configuracoes__fechar:hover {
+  background-color: var(--grid-cor-borda, #dddddd);
+}
+
+/* Conteúdo */
+
+.configuracoes__conteudo {
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px;
+  gap: 28px;
+
+  overflow-y: auto;
+}
+
+/* Seções */
+
+.configuracoes__secao {
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 24px;
+  gap: 16px;
+
+  border-bottom: 1px solid var(--grid-cor-borda, #dddddd);
+}
+
+.configuracoes__subtitulo {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.configuracoes__descricao {
+  color: var(--grid-cor-texto, #666666);
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Informações */
+
+.configuracoes__informacao {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.configuracoes__informacao span {
+  color: var(--grid-cor-texto, #666666);
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.configuracoes__informacao strong {
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* Botão de troca de computador */
+
+.configuracoes__botao {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 16px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background-color: var(--grid-cor-primaria, #005baa);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: opacity 0.2s ease;
+}
+
+.configuracoes__botao:hover {
+  opacity: 0.9;
+}
+
+/* Animação */
+
+@keyframes grid-configuracoes-entrada {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsividade */
+
+@media (max-width: 500px) {
+  .configuracoes {
+    max-width: 100%;
+  }
+
+  .configuracoes__cabecalho {
+    padding: 18px;
+  }
+
+  .configuracoes__conteudo {
+    padding: 20px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .configuracoes {
+    animation: none;
+  }
+}

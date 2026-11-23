@@ -1,0 +1,79 @@
+/* ========================================
+   GRID - Variáveis visuais
+   ======================================== */
+
+:root {
+  /* Cores */
+  --grid-cor-fundo: #ffffff;
+  --grid-cor-texto: #222222;
+  --grid-cor-primaria: #005baa;
+  --grid-cor-secundaria: #eeeeee;
+  --grid-cor-destaque: #ffcc00;
+  --grid-cor-historico: #f5f5f5;
+  --grid-cor-borda: #dddddd;
+
+  /* Tipografia */
+  --grid-fonte-principal: Arial, sans-serif;
+  --grid-tamanho-paciente: 64px;
+  --grid-tamanho-guiche: 36px;
+  --grid-tamanho-historico: 22px;
+
+  /* Espaçamentos */
+  --grid-espacamento: 16px;
+
+  /* Imagens */
+  --grid-imagem-fundo: none;
+  --grid-logo: none;
+
+  /* Animações */
+  --grid-duracao-animacao: 0.5s;
+  --grid-duracao-chamada: 8s;
+
+  /* Bordas */
+  --grid-raio-borda: 8px;
+  --grid-largura-borda: 1px;
+}
+
+/* Tema padrão */
+body.tema-padrao {
+  --grid-cor-fundo: #ffffff;
+  --grid-cor-texto: #222222;
+  --grid-cor-primaria: #005baa;
+  --grid-cor-secundaria: #eeeeee;
+  --grid-cor-destaque: #ffcc00;
+  --grid-cor-historico: #f5f5f5;
+  --grid-cor-borda: #dddddd;
+}
+
+/* Tema Natal */
+body.tema-natal {
+  --grid-cor-fundo: #f7f7f7;
+  --grid-cor-texto: #222222;
+  --grid-cor-primaria: #b51f2a;
+  --grid-cor-secundaria: #e5f0e5;
+  --grid-cor-destaque: #d4af37;
+  --grid-cor-historico: #edf4ed;
+  --grid-cor-borda: #c9d8c9;
+}
+
+/* Tema Outubro Rosa */
+body.tema-outubro-rosa {
+  --grid-cor-fundo: #fff8fa;
+  --grid-cor-texto: #333333;
+  --grid-cor-primaria: #d94f8a;
+  --grid-cor-secundaria: #fce8f0;
+  --grid-cor-destaque: #ed9abb;
+  --grid-cor-historico: #fff0f5;
+  --grid-cor-borda: #f0c5d7;
+}
+
+/* Tema Novembro Azul */
+body.tema-novembro-azul {
+  --grid-cor-fundo: #f5f9ff;
+  --grid-cor-texto: #222222;
+  --grid-cor-primaria: #1765a8;
+  --grid-cor-secundaria: #e4effa;
+  --grid-cor-destaque: #65a9df;
+  --grid-cor-historico: #edf4fc;
+  --grid-cor-borda: #c7d9ec;
+}

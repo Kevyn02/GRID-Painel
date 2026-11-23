@@ -1,0 +1,264 @@
+/* ========================================
+   GRID - Layout principal
+   ======================================== */
+
+/* Painel ocupa toda a tela */
+
+.painel {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 320px;
+
+  overflow: hidden;
+}
+
+/* Conteúdo dividido em duas colunas */
+
+.painel__conteudo {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.85fr)
+    minmax(280px, 1fr);
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* ========================================
+   Chamada atual
+   ======================================== */
+
+.chamada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  padding: 40px;
+  gap: 48px;
+
+  overflow: hidden;
+
+  background-color: var(--grid-cor-fundo, #ffffff);
+  color: var(--grid-cor-texto, #222222);
+}
+
+.chamada__titulo {
+  color: var(--grid-cor-primaria, #005baa);
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.chamada__informacoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 48px;
+
+  text-align: center;
+}
+
+.chamada__paciente,
+.chamada__guiche {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  gap: 14px;
+}
+
+.chamada__rotulo {
+  color: var(--grid-cor-texto, #222222);
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-weight: 600;
+}
+
+#pacienteAtual {
+  width: 100%;
+  max-width: 100%;
+
+  color: var(--grid-cor-texto, #222222);
+  font-size: clamp(32px, 5vw, var(--grid-tamanho-paciente, 64px));
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+#guicheAtual {
+  color: var(--grid-cor-primaria, #005baa);
+  font-size: clamp(28px, 3.5vw, var(--grid-tamanho-guiche, 36px));
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ========================================
+   Histórico
+   ======================================== */
+
+.historico {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  padding: 28px 22px;
+  gap: 24px;
+
+  overflow: hidden;
+
+  background-color: var(--grid-cor-secundaria, #eeeeee);
+  border-left: var(--grid-largura-borda, 1px) solid
+    var(--grid-cor-borda, #dddddd);
+}
+
+.historico__titulo {
+  flex-shrink: 0;
+
+  padding-bottom: 16px;
+
+  border-bottom: 1px solid var(--grid-cor-borda, #dddddd);
+
+  color: var(--grid-cor-texto, #222222);
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 700;
+}
+
+.historico__lista {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 0;
+  gap: 10px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-color: var(--grid-cor-historico, #f5f5f5);
+  border-radius: var(--grid-raio-borda, 8px);
+
+  font-size: var(--grid-tamanho-historico, 22px);
+}
+
+/* Elementos adicionados dinamicamente ao histórico */
+
+.historico__lista > * {
+  flex-shrink: 0;
+  padding: 12px;
+}
+
+/* ========================================
+   Botão de configurações
+   ======================================== */
+
+.painel__configuracoes-botao {
+  position: fixed;
+
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid var(--grid-cor-borda, #dddddd);
+  border-radius: 50%;
+
+  background-color: var(--grid-cor-secundaria, #ffffff);
+  color: var(--grid-cor-texto, #222222);
+
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+
+  font-size: 22px;
+  line-height: 1;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.painel__configuracoes-botao:hover {
+  transform: rotate(30deg);
+  background-color: var(--grid-cor-borda, #dddddd);
+}
+
+/* ========================================
+   Responsividade
+   ======================================== */
+
+@media (max-width: 900px) {
+  .painel__conteudo {
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(240px, 1fr);
+  }
+
+  .chamada {
+    padding: 24px;
+    gap: 32px;
+  }
+
+  .historico {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .painel__conteudo {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1.25fr) minmax(180px, 0.75fr);
+  }
+
+  .chamada {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .chamada__informacoes {
+    gap: 24px;
+  }
+
+  .historico {
+    padding: 16px;
+    border-top: var(--grid-largura-borda, 1px) solid
+      var(--grid-cor-borda, #dddddd);
+    border-left: 0;
+  }
+
+  .historico__titulo {
+    padding-bottom: 10px;
+  }
+
+  .painel__configuracoes-botao {
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+  }
+}

@@ -1,0 +1,123 @@
+/* ========================================
+   GRID - Estilos básicos
+   ======================================== */
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Configurações gerais */
+html {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  font-family: var(--grid-fonte-principal, Arial, sans-serif);
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background-color: var(--grid-cor-fundo, #ffffff);
+  background-image: var(--grid-imagem-fundo, none);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: var(--grid-cor-texto, #222222);
+  font-family: var(--grid-fonte-principal, Arial, sans-serif);
+
+  overflow-x: hidden;
+}
+
+/* Elementos de mídia */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Formulários */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Listas */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+/* Foco acessível */
+:focus-visible {
+  outline: 3px solid var(--grid-cor-primaria, #005baa);
+  outline-offset: 3px;
+}
+
+/* Seleção de texto */
+::selection {
+  background-color: var(--grid-cor-primaria, #005baa);
+  color: #ffffff;
+}
+
+/* Elementos auxiliares */
+[hidden] {
+  display: none !important;
+}
+
+/* Acessibilidade: reduzir animações */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
