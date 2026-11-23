@@ -21,6 +21,7 @@
 - Panel config persists in `config/paineis/{computador}.json` (+ `config/backups/`), created lazily on first POST to `api/configuracoes.php`. Runtime-generated: do not commit. `chamada.php` reads monitored queues from that JSON — missing file/empty `filas` returns "no calls" by design, not a bug.
 
 ## Constraints (intentional, do not "improve")
+- Oracle DB is STRICTLY READ-ONLY: only SELECT via the existing endpoints. Never run INSERT/UPDATE/DELETE/DDL or any write. If a new query is needed, ask the user to create it first.
 - 30-min config-sync polling is deliberate; WebSocket/SSE is NOT available on the production server — keep polling.
 - Establishment id 125 is hardcoded in `config.php` by design.
 - `docs/plano-de-implementacao.md` has a status section: queue selection + config schema/validation are done; themes CRUD, image uploads, panel linking, and admin tabs are still pending.
