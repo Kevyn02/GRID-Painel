@@ -7,15 +7,17 @@
     status: "",
     ultimoHorario: null,
     timerChamada: null,
+    duracaoChamada: 8000,
+    animacao: "zoom",
   };
 
   const elementos = {
     paciente: document.getElementById("pacienteAtual"),
     guiche: document.getElementById("guicheAtual"),
+    rotulo: document.getElementById("rotuloPaciente"),
     historico: document.getElementById("historicoLista"),
     status: document.getElementById("status"),
     conexao: document.getElementById("conexao"),
-    indicador: document.querySelector(".indicador-chamada"),
   };
 
   function obterHora(chamada) {
@@ -56,24 +58,20 @@
       return;
     }
 
-    elementos.paciente.classList.remove("animar");
+    elementos.paciente.classList.remove(
+      "animar-zoom",
+      "animar-fade",
+      "animar-slide",
+    );
 
     // Reinicia a animação CSS.
     void elementos.paciente.offsetWidth;
 
-    elementos.paciente.classList.add("animar");
+    elementos.paciente.classList.add(`animar-${estado.animacao}`);
   }
 
   function telaChamada() {
     document.body.classList.add("chamada-ativa");
-
-    if (elementos.indicador) {
-      elementos.indicador.classList.remove("mostrar");
-
-      void elementos.indicador.offsetWidth;
-
-      elementos.indicador.classList.add("mostrar");
-    }
 
     if (estado.timerChamada) {
       clearTimeout(estado.timerChamada);
@@ -81,13 +79,48 @@
 
     estado.timerChamada = setTimeout(() => {
       document.body.classList.remove("chamada-ativa");
-
-      if (elementos.indicador) {
-        elementos.indicador.classList.remove("mostrar");
-      }
-
       estado.timerChamada = null;
-    }, 8000);
+    }, estado.duracaoChamada);
+  }
+
+  function aplicarConfiguracoes(configuracoes) {
+    if (!configuracoes || typeof configuracoes !== "object") {
+      return;
+    }
+
+    const tituloPainel = configuracoes.geral?.titulo;
+
+    if (typeof tituloPainel === "string" && tituloPainel.trim()) {
+      document.title = tituloPainel.trim();
+    }
+
+    const tituloChamada = configuracoes.chamada?.titulo;
+
+    if (
+      elementos.rotulo &&
+      typeof tituloChamada === "string" &&
+      tituloChamada.trim()
+    ) {
+      elementos.rotulo.textContent = tituloChamada.trim();
+    }
+
+    const duracao = Number(configuracoes.chamada?.duracao);
+
+    estado.duracaoChamada =
+      Number.isInteger(duracao) && duracao >= 3 && duracao <= 30
+        ? duracao * 1000
+        : 8000;
+
+    document.documentElement.style.setProperty(
+      "--grid-duracao-chamada",
+      `${estado.duracaoChamada / 1000}s`,
+    );
+
+    const animacao = configuracoes.chamada?.animacao;
+
+    estado.animacao = ["zoom", "fade", "slide"].includes(animacao)
+      ? animacao
+      : "zoom";
   }
 
   function mostrarPaciente(chamada, animar = true) {
@@ -164,6 +197,16 @@
 
   document.addEventListener("grid:status", (evento) => {
     processarStatus(evento);
+  });
+
+  [
+    "grid:configuracoes-carregadas",
+    "grid:configuracoes-atualizadas",
+    "grid:configuracoes-preview",
+  ].forEach((nome) => {
+    document.addEventListener(nome, (evento) => {
+      aplicarConfiguracoes(evento.detail?.configuracoes);
+    });
   });
 
   // Integra a fila com a interface e o áudio.

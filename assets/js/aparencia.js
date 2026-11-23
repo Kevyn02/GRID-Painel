@@ -249,6 +249,10 @@
     aplicar(evento.detail?.configuracoes);
   });
 
+  document.addEventListener("grid:configuracoes-preview", (evento) => {
+    aplicar(evento.detail?.configuracoes);
+  });
+
   window.GridAparencia = {
     aplicar,
 

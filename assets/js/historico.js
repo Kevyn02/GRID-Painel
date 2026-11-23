@@ -3,13 +3,42 @@
 
   const elementos = {
     lista: document.getElementById("historicoLista"),
+    titulo: document.getElementById("tituloHistorico"),
   };
 
   const estado = {
     chamadas: [],
     quantidade: 4,
     chamadaAtual: null,
+    mostrarHorario: true,
   };
+
+  function aplicarConfiguracoes(configuracoes) {
+    if (!configuracoes || typeof configuracoes !== "object") {
+      return;
+    }
+
+    const titulo = configuracoes.historico?.titulo;
+
+    if (elementos.titulo && typeof titulo === "string" && titulo.trim()) {
+      elementos.titulo.textContent = titulo.trim();
+    }
+
+    const mostrar = configuracoes.historico?.mostrar_horario;
+
+    if (typeof mostrar === "boolean") {
+      estado.mostrarHorario = mostrar;
+    }
+
+    const quantidade = Number(configuracoes.historico?.quantidade);
+
+    if (Number.isInteger(quantidade) && quantidade >= 2 && quantidade <= 5) {
+      estado.quantidade = quantidade;
+      estado.chamadas = estado.chamadas.slice(0, estado.quantidade);
+    }
+
+    renderizar();
+  }
 
   /**
    * Normaliza textos.
@@ -144,11 +173,15 @@
     guiche.className = "historico-guiche";
     guiche.textContent = texto(chamada.guiche);
 
-    const horario = document.createElement("div");
-    horario.className = "historico-hora";
-    horario.textContent = obterHora(chamada.data_evento);
+    item.append(nome, guiche);
 
-    item.append(nome, guiche, horario);
+    if (estado.mostrarHorario) {
+      const horario = document.createElement("div");
+      horario.className = "historico-hora";
+      horario.textContent = obterHora(chamada.data_evento);
+
+      item.append(horario);
+    }
 
     return item;
   }
@@ -198,6 +231,16 @@
       chamadas: [...estado.chamadas],
     };
   }
+
+  [
+    "grid:configuracoes-carregadas",
+    "grid:configuracoes-atualizadas",
+    "grid:configuracoes-preview",
+  ].forEach((nome) => {
+    document.addEventListener(nome, (evento) => {
+      aplicarConfiguracoes(evento.detail?.configuracoes);
+    });
+  });
 
   window.GridHistorico = Object.freeze({
     atualizar,
